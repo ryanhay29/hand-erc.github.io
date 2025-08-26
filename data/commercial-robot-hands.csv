@@ -1,9 +1,9 @@
 ﻿# Actuators,Hand name,Company name,Link to hand page,"Text description (important basic facts, things we particularly care about, and differentiating points, not all details)",Photo filename (coming soon),Date added,notes
 20,Shadow Dexterous Hand,Shadow Robot,https://shadowrobot.com/dexterous-hand-series/,"Actuation: 20 geared brushed DC motors pulling tendons passing through Bowden tubes at wrist. Each finger has 3 independently driven DOF and a fourth coupled DOF. Option to reduce from 4 fingers and a thumb to 3, 2, or 1 fingers and a thumb. 1-DOF palm flex. Wrist: 2 DOF. Communication: EtherCAT. Optional fingertip tactile sensors.",shadow-dexterous-hand.png,25-Aug,
-,Shadow DEX-EE,Shadow Robot,https://shadowrobot.com/dex-ee/,,shadow_dex_ee.jpg,25-Aug,
-,XHAND1,ROBOTERA,https://www.robotera.com/en/goods1/4.html,,xhand1.png,25-Aug,
-,Allegro Hand,Wonik Robotics,https://www.allegrohand.com/,,allegrohand.png,25-Aug,
-,SVH,Schunk,https://schunk.com/us/en/gripping-systems/special-gripper/svh/c/PGR_3161,,SVH_resized4.png,25-Aug,
+,Shadow DEX-EE,Shadow Robot,https://shadowrobot.com/dex-ee/,,shadow_dex_ee_v1.jpg,25-Aug,
+,XHAND1,ROBOTERA,https://www.robotera.com/en/goods1/4.html,,xhand1_v1.png,25-Aug,
+,Allegro Hand,Wonik Robotics,https://www.allegrohand.com/,,allegrohand_v1.png,25-Aug,
+,SVH,Schunk,https://schunk.com/us/en/gripping-systems/special-gripper/svh/c/PGR_3161,,SVH_resized5.png,25-Aug,
 ,Ability Hand,PSYONIC,https://www.psyonic.io/robots,,,25-Aug,
 ,ProHand 1.0,Proception AI,https://www.proception.ai/hand,,,25-Aug,
 ,Surge,Alt-Bionics,https://www.altbionics.com/robotics/,removable fingers,,25-Aug,
@@ -31,7 +31,6 @@
 ,Smart Hands,Roboworks,https://www.roboworks.net/store/p/smarthands,Another 6 dof 12 joint hand. who makes this robot hand? seems like the web page is for a distributor,,25-Aug,
 ,G1 Dex Hand,Unitree,https://www.unitree.com/g1,three digit dexterous hand,,25-Aug,
 ,Clone Hand,Clone Robotics,https://clonerobotics.com/hand,extremely biomimetic,,25-Aug,
-,Muscle v0,Daxo Robotics,"https://daxo-robotics.com/
-https://www.linkedin.com/posts/mikekalil_robotics-softrobotics-innovation-activity-7358211703999762432-jhOo?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC5Hsi0B7qjPD6cTGaX2XlU1WxrNFC0hIHQ","""Infinite dof"" 108 artificial muscles and AI powered to route power through other muscles in case of muscle failure. Continuum hand ",,25-Aug,More info: https://mikekalil.com/blog/daxo-robotics/ 
+,Muscle v0,Daxo Robotics,https://daxo-robotics.com/,"""Infinite dof"" 108 artificial muscles and AI powered to route power through other muscles in case of muscle failure. Continuum hand ",,25-Aug,More info: https://mikekalil.com/blog/daxo-robotics/ 
 ,GMH18,PaXini,https://paxini.com/dex/gen3,,,,
 ,ROHand,OYMotion,https://oymotion.com/en/product62/191,,,,

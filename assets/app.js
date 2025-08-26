@@ -44,15 +44,14 @@ const norm = (s) => (s ?? "").toString().trim();
 
 /* === Rendering === */
 function renderHeader() {
+  // Removed Website + Notes from the header list
   const headers = [
     { key: "_image", label: "Image" },
     { key: COL.NAME, label: "Hand name" },
     { key: COL.COMPANY, label: "Company" },
     { key: COL.ACTUATORS, label: "# Actuators" },
-    { key: COL.LINK, label: "Website" },
     { key: COL.DESC, label: "Description" },
     { key: COL.DATE_ADDED, label: "Date added" },
-    { key: COL.NOTES, label: "Notes" },
   ];
 
   thead.innerHTML = "<tr>" + headers.map(h => {
@@ -61,7 +60,7 @@ function renderHeader() {
     return `<th data-key="${h.key}">${h.label}<span class="sort">${arrow}</span></th>`;
   }).join("") + "</tr>";
 
-  // click to sort
+  // click to sort (no sorting on the image pseudo-column)
   thead.querySelectorAll("th").forEach(th => {
     th.addEventListener("click", () => {
       const key = th.dataset.key;
@@ -81,30 +80,31 @@ function renderBody() {
     const name = norm(r[COL.NAME]);
     const company = norm(r[COL.COMPANY]);
     const actuators = norm(r[COL.ACTUATORS]);
-    const link = norm(r[COL.LINK]);
+    const link = norm(r[COL.LINK]);  // we'll use this to wrap the name
     const desc = norm(r[COL.DESC]);
     const dateAdded = norm(r[COL.DATE_ADDED]);
-    const notes = norm(r[COL.NOTES]);
 
     const imgUrl = imageFromPhotoColumn(r[COL.PHOTO_FILE]);
     const imgCell = (toggleImages && !toggleImages.checked) ? "" :
-      `<td>${imgUrl ? `<img class="thumb" src="${imgUrl}" alt="" loading="lazy">` : ""}</td>`;
+      `<td>${imgUrl ? `<img class="thumb" src="${imgUrl}" alt="" loading="lazy" onerror="this.style.display='none';">` : ""}</td>`;
 
-    const linkCell = link ? `<a href="${link}" target="_blank" rel="noopener">Link</a>` : "";
+    const companyCell = company
+      ? (company.length <= 24 ? `<span class="badge gray">${company}</span>` : company)
+      : "";
 
-    // Compact badges for short categorical things; plain text otherwise
-    const companyCell = company ? (company.length <= 24 ? `<span class="badge gray">${company}</span>` : company) : "";
+    // NEW: make the hand name itself the link; if no link, just show the text
+    const nameCell = link
+      ? `<a href="${link}" target="_blank" rel="noopener">${name}</a>`
+      : name;
 
-    // Description cell gets a wider column
+    // Removed the "Website" column entirely and hid "Notes"
     return `<tr>
       ${imgCell}
-      <td>${name}</td>
+      <td>${nameCell}</td>
       <td>${companyCell}</td>
       <td>${actuators}</td>
-      <td>${linkCell}</td>
       <td class="wide">${desc}</td>
       <td>${dateAdded}</td>
-      <td>${notes}</td>
     </tr>`;
   }).join("");
 }
@@ -143,18 +143,17 @@ function render() {
 function applyTransforms() {
   const needle = norm(qInput.value).toLowerCase();
 
-  // filter
+  // Filter across visible/important fields
   viewRows = rawRows.filter(r => {
     if (!needle) return true;
-    // search across name, company, description, notes
     const hay = [
-      r[COL.NAME], r[COL.COMPANY], r[COL.DESC], r[COL.NOTES],
-      r[COL.LINK], r[COL.ACTUATORS], r[COL.DATE_ADDED]
+      r[COL.NAME], r[COL.COMPANY], r[COL.DESC], r[COL.DATE_ADDED],
+      // you can add r[COL.NOTES] here if you want search to include the hidden notes
     ].map(v => norm(v).toLowerCase()).join(" ");
     return hay.includes(needle);
   });
 
-  // sort
+  // Sort (works on any visible column key)
   if (sortBy) {
     const { key, dir } = sortBy;
     viewRows.sort((a, b) => {
