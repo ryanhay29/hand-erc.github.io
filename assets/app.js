@@ -103,7 +103,7 @@ function renderBody() {
       <td>${nameCell}</td>
       <td>${companyCell}</td>
       <td>${actuators}</td>
-      <td class="wide">${desc}</td>
+      <td class="folded"><div class="inner">${desc}</div></td>
       <td>${dateAdded}</td>
     </tr>`;
   }).join("");

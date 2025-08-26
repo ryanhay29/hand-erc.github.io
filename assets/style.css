@@ -21,3 +21,16 @@ img.thumb{display:block;width:80px;height:60px;object-fit:cover;border-radius:.5
 .pager{display:flex;gap:.4rem;justify-content:center;padding:.9rem 0}
 .pager button{padding:.35rem .6rem;border:1px solid var(--border);background:#fff;border-radius:.5rem;cursor:pointer}
 .pager button[disabled]{opacity:.5;cursor:default}
+/* Fold long text, show full on hover */
+
+/* In-place expansion for long descriptions */
+td.folded { max-width: 320px; }
+td.folded .inner {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+td.folded:hover .inner {
+  white-space: normal;          /* unwrap to multiple lines */
+}
