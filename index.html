@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Commercial Robotic Hands Catalog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="./assets/style.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer></script>
+  <script>window.CSV_PATH = "./data/commercial-robot-hands.csv";</script>
+  <script src="./assets/app.js" defer></script>
+</head>
+<body>
+  <header class="wrap">
+    <h1>Commercial Robotic Hands</h1>
+    <p class="muted">Data source: <code>/data/commercial-robot-hands.csv</code>. Update the CSV → page updates automatically.</p>
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="Filter by name, company, notes…" />
+      <label class="small"><input id="toggle-images" type="checkbox" checked /> Show images</label>
+      <select id="rows-per-page" aria-label="Rows per page">
+        <option>25</option><option selected>50</option><option>100</option>
+      </select>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="table-wrap">
+      <table id="table">
+        <thead id="thead"></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <nav id="pager" class="pager" aria-label="Pagination"></nav>
+  </main>
+
+  <footer class="wrap muted">
+    <small>Plain HTML/JS; CSV parsed by PapaParse.</small>
+  </footer>
+</body>
+</html>
