@@ -50,9 +50,9 @@ td.folded[data-full]:hover::after {
   position: absolute;
   left: 0;
   top: 100%;
-  margin-top: 6px;
+  margin-top: -16px;
   width: min(420px, 60vw);   /* was 520px/70vw → narrower */
-  max-height: 45vh;
+  max-height: 40vh;
   overflow: auto;
   white-space: normal;
   background: #fff;
@@ -61,6 +61,7 @@ td.folded[data-full]:hover::after {
   padding: .6rem .7rem;
   box-shadow: 0 8px 24px rgba(0,0,0,.12);
   z-index: 20;
+  pointer-events: none;
 }
 
 /* On very small screens, make it even narrower */

@@ -44,7 +44,7 @@ const norm = (s) => (s ?? "").toString().trim();
 
 
 // Consider descriptions longer than this "long"
-const FOLD_THRESHOLD_CHARS = 80; // adjustable
+const FOLD_THRESHOLD_CHARS = 85; // adjustable
 const escAttr = (s) => (s ?? "")
   .replace(/&/g, "&amp;").replace(/</g, "&lt;")
   .replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
