@@ -17,9 +17,9 @@ const COL = {
 const imageFromPhotoColumn = (v) => {
   v = (v ?? "").trim();
   if (!v) return "";
-  // If the cell already contains a full URL, use it. Otherwise build a repo path.
   if (/^https?:\/\//i.test(v)) return v;
-  return `./assets/img/${v}`;
+  const segments = v.split("/").map(s => encodeURIComponent(s));
+  return `./assets/img/${segments.join("/")}`;
 };
 
 /* === State & DOM === */
@@ -41,6 +41,16 @@ const toggleImages = document.getElementById("toggle-images");
 const debounce = (fn, ms=200) => { let t; return (...a) => { clearTimeout(t); t=setTimeout(() => fn(...a), ms); }; };
 const isNumeric = (v) => v !== "" && !isNaN(v) && isFinite(Number(v));
 const norm = (s) => (s ?? "").toString().trim();
+
+
+// Consider descriptions longer than this "long"
+const FOLD_THRESHOLD_CHARS = 80; // adjustable
+const escAttr = (s) => (s ?? "")
+  .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+  .replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+
+const cssUrl = (s) => `url("${(s ?? "").replace(/"/g, '\\"')}")`;
+
 
 /* === Rendering === */
 function renderHeader() {
@@ -86,7 +96,14 @@ function renderBody() {
 
     const imgUrl = imageFromPhotoColumn(r[COL.PHOTO_FILE]);
     const imgCell = (toggleImages && !toggleImages.checked) ? "" :
-      `<td>${imgUrl ? `<img class="thumb" src="${imgUrl}" alt="" loading="lazy" onerror="this.style.display='none';">` : ""}</td>`;
+      `<td class="image">${
+        imgUrl
+          ? `<span class="imgpop" style="background-image: url('${imgUrl}')">
+              <img class="thumb" src="${imgUrl}" alt="" loading="lazy"
+                    onerror="this.closest('td').style.display='none';">
+            </span>`
+          : ""
+      }</td>`;
 
     const companyCell = company
       ? (company.length <= 24 ? `<span class="badge gray">${company}</span>` : company)
@@ -97,13 +114,19 @@ function renderBody() {
       ? `<a href="${link}" target="_blank" rel="noopener">${name}</a>`
       : name;
 
-    // Removed the "Website" column entirely and hid "Notes"
+    // Description: fold only if long; otherwise plain cell
+    const isLong = desc.length > FOLD_THRESHOLD_CHARS;
+    const descCell = isLong
+      ? `<td class="folded" data-full="${escAttr(desc)}"><div class="inner">${desc}</div></td>`
+      : `<td>${desc}</td>`;
+
+    // Removed the "Website" column entirely and hide "Notes"
     return `<tr>
       ${imgCell}
       <td>${nameCell}</td>
       <td>${companyCell}</td>
       <td>${actuators}</td>
-      <td class="folded"><div class="inner">${desc}</div></td>
+      ${descCell}
       <td>${dateAdded}</td>
     </tr>`;
   }).join("");
