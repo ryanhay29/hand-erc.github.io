@@ -1,40 +1,130 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Commercial Robotic Hands Catalog</title>
+  <meta charset="UTF-8" />
+  <title>HAND ERC – The NSF Human AugmentatioN via Dexterity Engineering Research Center</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="./assets/style.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer></script>
-  <script>window.CSV_PATH = "./data/commercial-robot-hands.csv";</script>
-  <script src="./assets/app.js" defer></script>
+  <link rel="stylesheet" href="./assets/style.css" />
+  <style>
+    .wiki-wrap {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .wiki-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .logo {
+      width: 250px; /* increased size */
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+    .wiki-title {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      line-height: 1.15;
+    }
+    .wiki-subtitle {
+      margin: .4rem 0 0;
+      font-size: 1rem;      /* smaller than title */
+      line-height: 1.4;
+      color: var(--muted);
+    }
+    .wiki-section {
+      margin-top: 1.5rem;
+    }
+    .wiki-section h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 1.2rem 0 .4rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: .35rem;
+    }
+    .wiki-links {
+      list-style: disc;
+      padding-left: 1.25rem;
+      margin: .25rem 0 1rem;
+    }
+    .wiki-links li {
+      margin: .2rem 0;
+    }
+    .muted { color: var(--muted); }
+    .badge {
+      display: inline-block; font-size: .75rem; padding: .1rem .4rem;
+      border: 1px solid var(--border); border-radius: .4rem;
+      margin-left: .35rem;
+    }
+    .intro {
+      background: #fafafa;
+      border: 1px solid var(--border);
+      border-radius: .6rem;
+      padding: .9rem 1rem;
+      margin: .75rem 0 1.25rem;
+    }
+  </style>
 </head>
 <body>
-  <header class="wrap">
-    <h1>Commercial Robotic Hands</h1>
-    <p class="muted">Data source: <code>/data/commercial-robot-hands.csv</code>. Updating the CSV will update page automatically.</p>
-    <div class="toolbar">
-      <input id="q" type="search" placeholder="Filter by name, company, notes…" />
-      <label class="small"><input id="toggle-images" type="checkbox" checked /> Show images</label>
-      <select id="rows-per-page" aria-label="Rows per page">
-        <option>25</option><option selected>50</option><option>100</option>
-      </select>
-    </div>
-  </header>
+  <main class="wiki-wrap">
+    <header class="wiki-header">
+      <div>
+        <h1 class="wiki-title">HAND ERC</h1>
+        <p class="wiki-subtitle">
+          The NSF Human AugmentatioN via Dexterity Engineering Research Center
+        </p>
+      </div>
+      <!-- Larger logo -->
+      <img class="logo" src="./assets/img/hand-nsf-logo-1-25-short-335.png" alt="HAND ERC logo" />
+    </header>
 
-  <main class="wrap">
-    <div class="table-wrap">
-      <table id="table">
-        <thead id="thead"></thead>
-        <tbody id="tbody"></tbody>
-      </table>
-    </div>
-    <nav id="pager" class="pager" aria-label="Pagination"></nav>
+    <section class="intro">
+      <p>Welcome! This is a hub for datasets, catalogs, and resources for HAND ERC. This front page links to active pages in the site. If you’re contributing, see the "Contributing" section.</p>
+    </section>
+
+    <section class="wiki-section">
+    <h2>Datasets</h2>
+    <ul class="wiki-links">
+        <li>
+        <a href="./datasets/example-dataset.html">Dataset 1</a>
+        <span class="muted"> – dataset description</span>
+        </li>
+        <li>
+        <a href="./datasets/example-dataset-2.html">Dataset 2</a>
+        <span class="muted"> – dataset description</span>
+        </li>
+    </ul>
+    </section>
+
+    <section class="wiki-section">
+      <h2>Catalogs</h2>
+      <ul class="wiki-links">
+        <li>
+          <a href="./hands.html">Commercial Robotic Hands (under construction)</a>
+          <!-- <span class="badge">CSV-driven</span> -->
+          <span class="muted"> – searchable table</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="wiki-section">
+      <h2>Resources</h2>
+      <ul class="wiki-links">
+        <li><a>Github Repo</a></li>
+      </ul>
+    </section>
+
+    <section class="wiki-section">
+      <h2>Contributing</h2>
+      <ul class="wiki-links">
+        <li>Update data by editing CSV files in <code>/data/</code>.</li>
+        <li>Images live under <code>/assets/img/</code>.</li>
+        <li>Open a PR; GitHub Pages auto-updates after merge to <code>main</code>.</li>
+      </ul>
+    </section>
   </main>
-
-  <footer class="wrap muted">
-    <small>Plain HTML/JS; CSV parsed by PapaParse.</small>
-  </footer>
-
 </body>
 </html>
