@@ -32,5 +32,6 @@
 ,G1 Dex Hand,Unitree,https://www.unitree.com/g1,three digit dexterous hand,,25-Aug,
 ,Clone Hand,Clone Robotics,https://clonerobotics.com/hand,extremely biomimetic,,25-Aug,
 ,Muscle v0,Daxo Robotics,https://daxo-robotics.com/,"""Infinite dof"" 108 artificial muscles and AI powered to route power through other muscles in case of muscle failure. Continuum hand ",,25-Aug,More info: https://mikekalil.com/blog/daxo-robotics/ 
-,GMH18,PaXini,https://paxini.com/dex/gen3,,,,
-,ROHand,OYMotion,https://oymotion.com/en/product62/191,,,,
+,GMH18,PaXini,https://paxini.com/dex/gen3,,,25-Aug,
+,ROHand,OYMotion,https://oymotion.com/en/product62/191,,,25-Aug,
+,DexHand021,DexRobot,https://www.dex-robot.com/en/dexhandList,Three available models,dexrobot_hand-removebg_resize.png,25-Aug,
