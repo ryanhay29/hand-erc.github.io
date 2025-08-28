@@ -78,31 +78,25 @@ td.image { position: relative; }
 }
 
 /* The zoomed preview */
-.imgpop::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 100%;
-  margin-top: 6px;
+/* Global fixed-position image preview (doesn't affect table layout) */
+.imgpop-preview {
+  position: fixed;
   width: min(420px, 60vw);
   height: min(320px, 50vh);
-  background-image: var(--full, none);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #fff;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border);
   border-radius: .6rem;
   box-shadow: 0 8px 24px rgba(0,0,0,.12);
-  z-index: 30;
+  z-index: 1000;
+  pointer-events: none;
   display: none;
-}
-.imgpop:hover::after {
-  background-image: inherit;
-  display: block;
-}
-.imgpop:focus-within::after {
-  display: block;
+
+  /* Added to bring back the “card” look */
+  background-color: #fff;    /* white background */
+  padding: .5rem;            /* optional, adds a frame around image */
+  box-sizing: border-box;    /* ensures padding fits inside width/height */
 }
 
 .imgpop { cursor: zoom-in; }

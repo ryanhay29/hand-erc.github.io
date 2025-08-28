@@ -218,3 +218,79 @@ loadCSV().catch(err => {
   thead.innerHTML = "";
   tbody.innerHTML = `<tr><td>Failed to load <code>${CSV_PATH}</code>. Check the path and that GitHub Pages is enabled.</td></tr>`;
 });
+
+
+/* === Image hover preview (smart placement, no scroll flicker) === */
+(function () {
+  const preview = document.createElement('div');
+  preview.className = 'imgpop-preview';
+  document.body.appendChild(preview);
+
+  function placePreview(target) {
+    const rect = target.getBoundingClientRect();
+    const pad = 8;
+    const w = Math.min(420, window.innerWidth * 0.60);
+    const h = Math.min(320, window.innerHeight * 0.50);
+
+    // Default: show below, left-aligned with the thumbnail
+    let top = rect.bottom + pad;
+    let left = rect.left;
+
+    // Flip above if there isn't enough space below
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const spaceAbove = rect.top;
+    if (spaceBelow < h + pad && spaceAbove > spaceBelow) {
+      top = rect.top - h - pad;
+    }
+
+    // Clamp horizontally to keep inside viewport
+    left = Math.max(pad, Math.min(left, window.innerWidth - w - pad));
+
+    // If flip still goes off-screen (very small viewports), nudge inside
+    if (top < pad) top = pad;
+    if (top + h + pad > window.innerHeight) top = window.innerHeight - h - pad;
+
+    preview.style.width = w + 'px';
+    preview.style.height = h + 'px';
+    preview.style.left = left + 'px';
+    preview.style.top = top + 'px';
+  }
+
+  // Delegate events so it works for all rows (even after re-render)
+  let activeTarget = null;
+
+  document.addEventListener('mouseover', (e) => {
+    const host = e.target.closest('.imgpop');
+    if (!host) return;
+    activeTarget = host;
+
+    // Use the same image as your inline background-image on .imgpop
+    const bg = host.style.backgroundImage || getComputedStyle(host).backgroundImage;
+    if (!bg || bg === 'none') return;
+
+    preview.style.backgroundImage = bg;
+    placePreview(host);
+    preview.style.display = 'block';
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!activeTarget) return;
+    // Reposition while moving over the same .imgpop (nice when near edges)
+    if (e.target.closest('.imgpop') === activeTarget) {
+      placePreview(activeTarget);
+    }
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    // Hide when leaving the current .imgpop
+    const stillInside = e.relatedTarget && e.relatedTarget.closest('.imgpop') === activeTarget;
+    if (stillInside) return;
+    activeTarget = null;
+    preview.style.display = 'none';
+  });
+
+  // Hide on scroll/resize to avoid stale placement
+  window.addEventListener('scroll', () => { preview.style.display = 'none'; activeTarget = null; }, { passive: true });
+  window.addEventListener('resize', () => { preview.style.display = 'none'; activeTarget = null; });
+})();
+
