@@ -1,7 +1,7 @@
 :root{--bg:#fff;--fg:#111;--muted:#667085;--border:#e5e7eb;--accent:#2563eb}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-.wrap{max-width:1100px;margin:0 auto;padding:1rem}
+.wrap{max-width:1200px;margin:0 auto;padding:1rem}
 h1{margin:.5rem 0;font-size:clamp(1.5rem,2.5vw,2rem)}
 .muted{color:var(--muted)} .small{font-size:.875rem;color:var(--muted)}
 .toolbar{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap;margin:.75rem 0}
@@ -21,10 +21,11 @@ img.thumb{display:block;width:80px;height:60px;object-fit:cover;border-radius:.5
 .pager{display:flex;gap:.4rem;justify-content:center;padding:.9rem 0}
 .pager button{padding:.35rem .6rem;border:1px solid var(--border);background:#fff;border-radius:.5rem;cursor:pointer}
 .pager button[disabled]{opacity:.5;cursor:default}
+
 /* Fold long text, show full on hover */
 
-/* In-place expansion for long descriptions */
-/* td.folded { max-width: 320px; }
+/* In-place expansion for long descriptions
+ td.folded { max-width: 320px; }
 td.folded .inner {
   display: block;
   white-space: nowrap;
@@ -42,26 +43,6 @@ td.folded .inner {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-/* Hover card (below, narrower) */
-td.folded[data-full]:hover::after {
-  content: attr(data-full);
-  position: absolute;
-  left: 0;
-  top: 100%;
-  margin-top: -16px;
-  width: min(420px, 60vw);   /* was 520px/70vw → narrower */
-  max-height: 40vh;
-  overflow: auto;
-  white-space: normal;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: .5rem;
-  padding: .6rem .7rem;
-  box-shadow: 0 8px 24px rgba(0,0,0,.12);
-  z-index: 20;
-  pointer-events: none;
 }
 
 /* On very small screens, make it even narrower */
@@ -100,3 +81,24 @@ td.image { position: relative; }
 }
 
 .imgpop { cursor: zoom-in; }
+
+/* reduce width of 2nd column  */
+table td:nth-child(2) {
+  white-space: normal;
+  word-break: break-word;
+}
+
+.hovercard-global {
+  position: fixed;
+  max-width: min(420px, 60vw);
+  max-height: 40vh;
+  overflow: auto;
+  padding: .6rem .7rem;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: .5rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  z-index: 2000;
+  display: none;
+  pointer-events: none;
+}
